@@ -1,5 +1,23 @@
 import { assign, createMachine } from "xstate";
 
+const fillConuntries = {
+  initial: "loading",
+  states: {
+    loading: {
+      on: {
+        DONE: "success",
+        ERROR: "failure",
+      }
+    },
+    success: {},
+    failure: {
+      ON: {
+        RETRY: {target: "loading"},
+      }
+    }
+  }
+}
+
 const bookingMachine = createMachine({
   id: "buy plane tickets",
   initial: "initial",
@@ -28,6 +46,7 @@ const bookingMachine = createMachine({
           actions: 'cleanContext'
         },
       },
+      ...fillConuntries,
     },
     tickets: {
       on: {
