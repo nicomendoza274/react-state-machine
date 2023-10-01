@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Passengers.css';
 
-export const Passengers = ({ state, send }) => {
+export const Passengers = ({ state, send, context }) => {
   const [value, changeValue] = useState('');
 
   const onChangeInput = (e) => {
@@ -14,12 +14,14 @@ export const Passengers = ({ state, send }) => {
 
   const submit = (e) => {
     e.preventDefault();
+    send('ADD', { newPassenger: value })
     changeValue('');
   }
 
   return (
     <form onSubmit={submit} className='Passengers'>
       <p className='Passengers-title title'>Agrega a las personas que van a volar ✈️</p>
+      {context.passengers.map((passenger, index) => (<p key={index}>{passenger}</p>))}
       <input 
         id="name" 
         name="name" 
