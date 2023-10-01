@@ -8,6 +8,10 @@ export const Passengers = ({ state, send }) => {
     changeValue(e.target.value);
   }
 
+  const goToTicket = () => {
+    send('DONE')
+  }
+
   const submit = (e) => {
     e.preventDefault();
     changeValue('');
@@ -34,6 +38,7 @@ export const Passengers = ({ state, send }) => {
         </button>
         <button
           className='Passenger-pay button'
+          onClick={goToTicket}
           type="button"
         >
           Ver mi ticket
